@@ -25,3 +25,18 @@ resource "aws_s3_bucket_ownership_controls" "dev_s3" {
     object_ownership = "BucketOwnerPreferred"
   }
 }
+
+resource "aws_s3_bucket" "qa_s3" {
+  bucket_prefix = "qa-"
+
+  tags = {
+    Environment      = "QA"
+  }
+}
+
+resource "aws_s3_bucket_ownership_controls" "qa_s3" {
+  bucket = aws_s3_bucket.qa_s3.id
+  rule {
+    object_ownership = "BucketOwnerPreferred"
+  }
+}
